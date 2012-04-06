@@ -311,7 +311,7 @@ print INDEXFILE '<a name="end"><a href="#r1">'.$d{conf}{title}.': '.$filecount.'
 	.'</a></a>, '
 	.'<a href="'.$d{conf}{vid_dir}.'" target="_blank">'
 	.`du -h -s $d{conf}{vid_dir}`
-	.'</a>. <a href="'.$d{conf}{flashplayer_html}.'">Flashplayer</a>';
+	.'</a>. <a href="'.$d{conf}{flashplayer_html}.'">Flashplayer</a>, <a href="'.$d{conf}{flashplayer_html}.'?p=w">WindowsMediaPlayer</a>';
 
 print INDEXFILE "<ol>\n";
 foreach $key (sort (keys(%janchors))) {
@@ -385,9 +385,9 @@ for (keys %{$d{conf}}) {
 }
 print JSFILE "}";
 
-print JSFILE "\n\nvar z3emptyThumbs = new Array(\n'";
-print JSFILE join("',\n'", @empty_thumbs);
-print JSFILE "');";
+print JSFILE "\n\nvar z3emptyThumbsS = '";
+print JSFILE join(",", @empty_thumbs);
+print JSFILE "';";
 
 print JSFILE "\n\nvar z3picFlags = new Array(";
 $i = 0;

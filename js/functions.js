@@ -18,13 +18,13 @@ function preparePlayerURL() {
         + GetRequest.m
         + '&l='
         + GetRequest.l
+        + '&p='
+        + GetRequest.p
         + '&f=';
 }
 
 function isEmptyThumbnail(filename) {
-    for(i=0; i < z3emptyThumbs.length; i++) 
-        { if(z3emptyThumbs[i] == filename) { return true; } }
-    return false;
+    return z3emptyThumbsS.indexOf(filename) != -1;
 }
 
 function ol4i (video, thumbnail) {
@@ -62,7 +62,7 @@ function ol4iHTML (videofilename) {
     thumbnail = fpConf.thumbnail_directory
             + videofilename
             + fpConf.thumbnail_extension;
-    //if(isEmptyThumbnail(thumbnail)) {return '';}
+    if(isEmptyThumbnail(thumbnail)) {return " onmouseout=\"return nd();\" ";}
     if(fpConf.thumbnail_directory != '') {
         return " onmouseover=\"return ol4i('"
             + fpConf.dirVideo

@@ -26,13 +26,20 @@ if(tmp !== false) { GetRequest.f = tmp; }
 tmp = querySt("l");
 GetRequest.l = (tmp !== false && tmp == '1') ? 1 : 0;
 
+tmp = querySt("p");
+GetRequest.p = (tmp == false || (tmp != 'f' && tmp != 'w')) ? 'f' : tmp;
+
 // OnLoad inits
 // Use jQuery via jQuery(...)
 var $jq = jQuery.noConflict();
 
 $jq(document).ready(function(){
 
-
+    if(GetRequest.p == 'w') {
+        $jq('#li_loop_playlist').hide();
+        $jq('#li_enable_localdirs').hide();
+    }
+    
     function playnext() {
     
         if(document.forms['dimensions'].elements['c'].value == '1') {
@@ -68,7 +75,7 @@ $jq(document).ready(function(){
                     url: dataURL,
                     async: false
                  }).responseText;
-    var videoArray = stringData.match(fpConf.vidRegexp);
+    var videoArray = stringData.match(GetRequest.p == 'f' ? fpConf.vidRegexp : fpConf.windowsMediaVidRegexp);
     var uniqVids = new Array();
     if(videoArray != null) {
 
