@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Flash video player</title>
+<link rel="stylesheet" href="gallery.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="js/overlib/overlib.js"></script>
+<script type="text/javascript">z3Conf = {}; z3emptyThumbs = new Array();</script>
+<script type="text/javascript" src="js/z3_export.js"></script>
+<script type="text/javascript" src="js/fpconf.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript" src="js/fphelper.js"></script>
+<script type="text/javascript" src="flowplayer/example/flowplayer-3.2.6.min.js"></script>
+</head>
+<body>
+
+<table><tr><td valign="top">
+<script type="text/javascript">
+<!--
+
+if(GetRequest.f != '') {
+
+    document.writeln('<a href="'
+        + fpConf.dirVideo 
+        + GetRequest.f 
+        + '"   style="display:block;width:'
+        + Math.floor(GetRequest.w * GetRequest.m)
+        + 'px;height:'
+        + Math.floor(GetRequest.h * GetRequest.m)
+        + 'px;" id="player"></a>');
+
+    document.writeln('<script language="JavaScript">flowplayer("player","'
+        + fpConf.dirPlayer 
+        + 'flowplayer-3.2.7.swf");</script>');
+
+}
+
+-->
+</script>
+<div id="playerbar"></div>
+<br/>
+Notes:
+<form action="index.html" method="get" id="dimensions">
+<ol>
+
+<li>You can <input type="submit" value="change" /> player height (<input type="text" name="h" value="" size="4" onChange="return dirtyForm(this);"/> px) and width (<input type="text" name="w" value="" size="4"  onChange="return dirtyForm(this);"/> px) or multiply them by <input type="text" name="m" value="1.0" size="4"  onChange="return dirtyForm(this);"/><input type="hidden" name="c" value="0" /><input type="hidden" name="f" value="" />.</li>
+
+<li>You can also <input type="checkbox" name="l" value="1"/> put playlist on loop.</li>
+
+<li>Normally Flash won't run videos from your local filesystem (hard disk/CD/DVD/USB drive) and won't run the Flowplayer player object from your local filesystem. So you must tell Flash it can trust your video location and trust the Flowplayer object. You do that by going to <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html">http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html</a> which is Flash web site where your security settings are displayed and where you can change them to allow the locations from your local filesystem. (Note: your security settings are stored local by Flash and are not stored at the Adobe or Macromedia website; it is just that the software to manage your settings run there.) In the panel you can select files or directories to trust. It is advised to allow the directory where your video files are stored<script type="text/javascript">
+<!--
+
+document.writeln(' (<a href="'
+        + fpConf.dirVideo
+        + '">'
+        + fpConf.dirVideo
+        + '</a>)');
+
+-->
+</script> and where the Flowplayer .swf objects are stored<script type="text/javascript">
+<!--
+
+document.writeln(' (<a href="'
+        + fpConf.dirPlayer
+        + '">'
+        + fpConf.dirPlayer
+        + '</a>)');
+
+-->
+</script>.</li>
+</ol>
+</form>
+
+</td><td valign="top">
+
+<strong>Choose video<script type="text/javascript">
+<!--
+
+document.writeln(' (or <a href="'
+        + fpConf.playerPage
+        + '">reset page</a>)');
+-->
+</script>:</strong>
+
+<div id="videos"></div>
+</td></tr></table>
+</body>
+</html>

@@ -1,0 +1,78 @@
+# Configuration and data file for z3gallery, which creates HTML indexes for video directories
+# Additional software needed: perl, ffmpeg, fdupes*, $webbrowser* (* - optional)
+
+############## Rules:
+# 1. Lines with '#' in the beginning are comments;
+# 2. Lines in format '$variable_pi = 3.14' are configuration parameters
+# 3. Lines in format 'filename_in_vid_dir_no_whitespaces_allowed Text describing the video(s)'
+#    will add video's link and thumbnail (to the end of $index_html);
+# 4. Empty lines will be ignored.
+# 5. def=... in the end of comment/description means default value
+# 6. ALL texts must be encoded in UTF-8!
+
+############## Configuration what you usually need:
+
+# title of the video gallery; def=V
+$title = V
+
+# delete vids if ffmpeg isnt able to generate thumbnail (BE CAREFUL!)? def=no
+$autoclean = no
+
+# order files by file's 'name' or saving 'time'; def=time
+$order_by = time
+
+# delete duplicate files (needs fdupes)? def=no
+$delete_duplicates = no
+
+############## Configuration what you don't need often:
+
+# thumbnails subdirectory; def=g/
+$gallery_dir = g/
+
+# original videos subdirectory; def=v/
+$vid_dir = v/
+
+### width and height def's should be dividable by 2 (or was it 4?)
+# thumbnail's width in pixels; def=160
+$width = 160
+# thumbnail's height in pixels; def=120
+$height = 120
+
+# number of thumbnails in one row; def=4
+$jmax = 4
+
+# thumbnail's name consists video's fileextension? def=yes
+$tn_strategy_long = yes
+
+# if you wanna see thumbnails gallery, open this file in browser; def=index.html
+$index_html = index.html
+
+# web browser executable what you use for seeing and playing the gallery
+$webbrowser = konqueror
+
+# time from beginning of a clip to take an snapshot/thumbnail; def=00:00:01
+# NB! if it is more then default 00:00:01, it also takes more time to find that place!
+$snapshot_time = 00:00:01
+
+# link to Flash player
+$flashplayer_html = flashplayer.html
+
+# configuration export file for Javascript
+$z3_export_js = js/z3_export.js
+
+# videofile's descriptions (nothing happens when this file is missing)
+# file's format:
+#<?xml version="1.0" encoding="UTF-8"?>
+#<descriptions>
+#<d filename="...">
+#<label>...</label>
+#<txt>...</txt>
+#</d>
+#</descriptions>
+# Perl package XML::Simple required
+$descriptions_file = descriptions.xml
+
+########### Put your video descriptions here (as described in Rule #3)
+# (if video's filename is not found in $vid_dir, nothing happens):
+
+

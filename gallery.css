@@ -1,0 +1,15 @@
+BODY {
+	color: #ffffff; background: #000000;
+	font-family: Sans Serif, sans-serif;
+	font-size: 14pt; margin: 5pt;
+}
+
+IMG {
+	border: 1px solid #000000;
+	vertical-align:text-top;
+}
+
+A {text-decoration: none; color: white;}
+A:visited {text-decoration: none; color: lime;}
+A:focus {text-decoration: none; color: lime;}
+A:hover {text-decoration: underline; color: red;}
