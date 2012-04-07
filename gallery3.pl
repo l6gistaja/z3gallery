@@ -112,12 +112,22 @@ $descriptions = 0;
 if(-e $d{conf}{descriptions_file}) {
     $xml = new XML::Simple;
     $descr_data = $xml->XMLin($d{conf}{descriptions_file});
-    $descriptions = $#{$descr_data->{d}};
+    @descr = [];
+    $descriptions = 0;
     if($#anchors < 0) { @anchors = qw(); }
-    for($di=0; $di<=$descriptions; $di++) {
-        if($descr_data->{d}[$di]->{label} ne '') {
-            push @anchors, $descr_data->{d}[$di]->{filename};
-            push @anchors, $descr_data->{d}[$di]->{label};
+    
+    if(defined $descr_data->{channel}->{item}) {
+        if(ref($descr_data->{channel}->{item}) eq 'ARRAY') {
+            @descr = @{$descr_data->{channel}->{item}};
+        } elsif(ref($descr_data->{channel}->{item}) eq 'HASH') {
+            @descr = $descr_data->{channel}->{item};
+        }
+        $descriptions = $#descr;
+        for($di=0; $di<=$descriptions; $di++) {
+            if($descr[$di]->{'media:keywords'} ne '') {
+                push @anchors, $descr[$di]->{'media:content'}->{url};
+                push @anchors, $descr[$di]->{'media:keywords'};
+            }
         }
     }
 }
@@ -235,14 +245,14 @@ foreach(@files) {
         if($descriptions > 0) {
             $txt = '';
             for($di=0; $di<=$descriptions; $di++) {
-                if($descr_data->{d}[$di]->{filename} eq $clean_filename) {
+                if($descr[$di]->{'media:content'}->{url} eq $clean_filename) {
                 
-                    $tmp = $descr_data->{d}[$di]->{txt};
+                    $tmp = $descr[$di]->{description};
                     if(ref($tmp) eq '' && $tmp ne '') {
                         $txt = $tmp;
                     }
                     
-                    $tmp = $descr_data->{d}[$di]->{title};
+                    $tmp = $descr[$di]->{title};
                     if(ref($tmp) eq '' && $tmp ne '') {
                         $txt = '<strong>'.$tmp.'</strong>. '.$txt;
                     }
@@ -259,8 +269,6 @@ foreach(@files) {
                     .' href="#r'
                     .$anchorrow
                     .'"'
-                    #.' onmouseover="return ol4j('.$pic_no.');" '
-                    #.' onmouseout="return nd();"'
                     .'>'
                     .$txt
                     .'</a></li>'."\n";

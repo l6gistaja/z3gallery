@@ -63,13 +63,19 @@ $z3_export_js = js/z3_export.js
 # videofile's descriptions (nothing happens when this file is missing)
 # file's format:
 #<?xml version="1.0" encoding="UTF-8"?>
-#<descriptions>
-#<d filename="...">
-#<label>...</label>
-#<title>...</title>
-#<txt>...</txt>
-#</d>
-#</descriptions>
+#<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+#    <channel>
+#        <item>
+#            <title>...</title>
+#            <description>...</description>
+#            <media:content url="..."/>
+#            <media:keywords>...</media:keywords>
+#        </item>
+#        <item>
+#            ...
+#        </item>
+#    </channel>
+#</rss>
 # Perl package XML::Simple required
 $descriptions_file = descriptions.xml
 

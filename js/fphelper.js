@@ -49,12 +49,11 @@ $jq(document).ready(function(){
             url: z3Conf.descriptions_file,
             dataType: "xml",
             success: function(xml) {
-                $jq(xml).find('d').each(function(){
+                $jq(xml).find('item').each(function(){
                     var o = new Object();
                     o.title = $jq(this).find('title').text();
-                    o.label = $jq(this).find('label').text();
-                    o.txt = $jq(this).find('txt').text();
-                    var fn = $jq(this).attr('filename');
+                    o.txt = $jq(this).find('description').text();
+                    var fn = $jq(this).find('media\\:content').attr('url');
                     descriptions[fn] = o;
                 });
             }
