@@ -208,7 +208,7 @@ foreach(@files) {
                 $filecount --;
                 next;
             } else {
-                push @empty_thumbs, $tn;
+                push @empty_thumbs, z3_create_tn_fname_body($_,$tn_strategy_long).'.png';
                 # 1 - has no thumbnail
                 if(!$picflags{$pic_no}) {
                     $picflags{$pic_no} = 1;

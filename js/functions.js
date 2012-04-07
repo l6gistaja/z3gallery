@@ -24,7 +24,7 @@ function preparePlayerURL() {
 }
 
 function isEmptyThumbnail(filename) {
-    return z3emptyThumbsS.indexOf(filename) != -1;
+    return z3emptyThumbsS.indexOf(filename.substr(fpConf.dirVideo.length)) != -1;
 }
 
 function ol4i (video, thumbnail) {
