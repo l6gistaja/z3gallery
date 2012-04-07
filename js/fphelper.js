@@ -29,6 +29,8 @@ GetRequest.l = (tmp !== false && tmp == '1') ? 1 : 0;
 tmp = querySt("p");
 GetRequest.p = (tmp == false || (tmp != 'f' && tmp != 'w')) ? 'f' : tmp;
 
+var descriptions = {};
+
 // OnLoad inits
 // Use jQuery via jQuery(...)
 var $jq = jQuery.noConflict();
@@ -39,6 +41,27 @@ $jq(document).ready(function(){
         $jq('#li_loop_playlist').hide();
         $jq('#li_enable_localdirs').hide();
     }
+    
+    if(z3Conf.descriptions_file !== undefined) {
+
+        $jq.ajax({
+            type: "GET",
+            url: z3Conf.descriptions_file,
+            dataType: "xml",
+            success: function(xml) {
+                $jq(xml).find('d').each(function(){
+                    var o = new Object();
+                    o.title = $jq(this).find('title').text();
+                    o.label = $jq(this).find('label').text();
+                    o.txt = $jq(this).find('txt').text();
+                    var fn = $jq(this).attr('filename');
+                    descriptions[fn] = o;
+                });
+            }
+        });
+        
+    }
+
     
     function playnext() {
     

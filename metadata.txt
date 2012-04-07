@@ -66,6 +66,7 @@ $z3_export_js = js/z3_export.js
 #<descriptions>
 #<d filename="...">
 #<label>...</label>
+#<name>...</name>
 #<txt>...</txt>
 #</d>
 #</descriptions>

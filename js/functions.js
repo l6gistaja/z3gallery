@@ -50,29 +50,51 @@ function ol4j(link_no) {
 }
 
 function ol4t (txt_no) {
-    return overlib($('#d'+txt_no).html(),
-        STICKY, MOUSEOFF, VAUTO,
-        CELLPAD, 10,
-        TEXTCOLOR, '#FFFFFF',
-        FGCOLOR, '#000000',
-        BGCOLOR, '#FFFFFF');
+    return ol4x ($('#d'+txt_no).html());
+}
+
+function ol4x (str) {
+        return overlib(str,
+            STICKY, MOUSEOFF, VAUTO,
+            CELLPAD, 10,
+            TEXTCOLOR, '#FFFFFF',
+            FGCOLOR, '#000000',
+            BGCOLOR, '#FFFFFF');
 }
 
 function ol4iHTML (videofilename) {
-    thumbnail = fpConf.thumbnail_directory
+
+    txt = '';
+
+    if(fpConf.thumbnail_directory != '') {
+    
+        thumbnail = fpConf.thumbnail_directory
             + videofilename
             + fpConf.thumbnail_extension;
-    if(isEmptyThumbnail(thumbnail)) {return " onmouseout=\"return nd();\" ";}
-    if(fpConf.thumbnail_directory != '') {
-        return " onmouseover=\"return ol4i('"
-            + fpConf.dirVideo
-            + videofilename
-            + "','"
-            + thumbnail
-            + "');\" onmouseout=\"return nd();\" ";
-    } else {
-        return '';
+            
+        if(!isEmptyThumbnail(thumbnail)) {
+            txt = txt + '<img src=\''
+            +thumbnail
+            +'\' width=\'' + fpConf.thumbnail_width
+            +'\' height=\'' + fpConf.thumbnail_height
+            +'\ />'
+        }
+        
     }
+    
+    description = descriptions[videofilename];
+    if(description != null) {
+        txt = txt + (description.title != null&& description.title != ''
+            ? (txt != '' ? '<br/><br/>' : '' )
+             + '<strong>' + description.title + '</strong>' : '');
+        txt = txt + (description.txt != null && description.txt != ''
+            ? (txt != '' ? '<br/><br/>' : '' ) +description.txt : '');
+    }
+    
+    return (txt != '' ? " onmouseover=\"return ol4x('"
+                + txt.replace(/(\r\n|\n|\r)/gm,"").replace(/'/g,"\\'")
+                + "');\"" : '')
+            + " onmouseout=\"return nd();\" ";
 }
 
 
@@ -145,7 +167,9 @@ function navigation(videofile, vidUniqId, uniqVids) {
                     + preparePlayerURL()
                     //+ fpConf.dirVideo
                     + videofile
-                    + '">'
+                    + '"'
+                    + ol4iHTML(videofile)
+                    + '>'
                     + videofile
                     + '</a>';
 

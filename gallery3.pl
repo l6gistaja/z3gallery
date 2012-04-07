@@ -236,8 +236,19 @@ foreach(@files) {
             $txt = '';
             for($di=0; $di<=$descriptions; $di++) {
                 if($descr_data->{d}[$di]->{filename} eq $clean_filename) {
-                    $txt = $descr_data->{d}[$di]->{txt};
+                
+                    $tmp = $descr_data->{d}[$di]->{txt};
+                    if(ref($tmp) eq '' && $tmp ne '') {
+                        $txt = $tmp;
+                    }
+                    
+                    $tmp = $descr_data->{d}[$di]->{title};
+                    if(ref($tmp) eq '' && $tmp ne '') {
+                        $txt = '<strong>'.$tmp.'</strong>. '.$txt;
+                    }
+                    
                     last;
+                    
                 }
             }
             if($txt ne '') {
